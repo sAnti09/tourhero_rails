@@ -62,6 +62,6 @@ class TourAvailabilitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tour_availability_params
-      params.require(:tour_availability).permit(:start_date, :start_time, :end_date, :end_time, :recur_type, :recur_frequency, :recur_days, :recur_month, :recur_end_date, :recur_end_occurrence)
+      params.require(:tour_availability).permit(:start_date, :start_time, :end_date, :end_time, :recur_type, :recur_frequency, :recur_month, :recur_end_date, :recur_end_occurrence, recur_days: [])
     end
 end

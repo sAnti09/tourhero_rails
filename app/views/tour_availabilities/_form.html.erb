@@ -1,7 +1,8 @@
 <%= form_with(model: [@tour, tour_availability]) do |form| %>
   <% if tour_availability.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(tour_availability.errors.count, "error") %> prohibited this tour_availability from being saved:</h2>
+      <h2><%= pluralize(tour_availability.errors.count, "error") %> prohibited this tour_availability from being
+        saved:</h2>
 
       <ul>
         <% tour_availability.errors.each do |error| %>
@@ -35,7 +36,7 @@
 
   <div>
     <%= form.label :recur_type, style: "display: block" %>
-    <%= form.text_field :recur_type %>
+    <%= form.select :recur_type, options_for_enum(TourAvailability.recur_types), prompt: 'Select' %>
   </div>
 
   <div>
@@ -45,12 +46,14 @@
 
   <div>
     <%= form.label :recur_days, style: "display: block" %>
-    <%= form.number_field :recur_days %>
+    <% Date::DAYNAMES.map.with_index do |day, index| %>
+      <%= day %><%= check_box_tag 'tour_availability[recur_days][]', index, tour_availability.recur_days.include?(index) %>
+    <% end %>
   </div>
 
   <div>
     <%= form.label :recur_month, style: "display: block" %>
-    <%= form.text_field :recur_month %>
+    <%= form.select :recur_month, options_for_enum(TourAvailability.recur_months), prompt: 'Select' %>
   </div>
 
   <div>
