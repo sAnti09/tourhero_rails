@@ -8,9 +8,11 @@ class TourAvailability < ApplicationRecord
 
   belongs_to :tour
 
-  validates_presence_of :start_date
+  validates_presence_of :start_date, :tour_id
   validates_presence_of :recur_days, if: :weekly?
+  validates_presence_of :recur_month, if: :monthly?
   validates :recur_type, inclusion: { in: recur_types.keys }, if: :recur_type?
+  validates :recur_days, inclusion: { in: (0..6).to_a }, if: :weekly?
   validates :recur_month, inclusion: { in: recur_months.keys }, if: :monthly?
   validates :start_time, :end_time, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 2359 }, allow_nil: true
   validates :recur_frequency, numericality: { greater_than: 0 }, if: :recur_type?
@@ -33,7 +35,7 @@ class TourAvailability < ApplicationRecord
       str = "#{start_date < Date.today ? 'scheduled' : 'starts'} every"
 
       if recur_frequency == 1
-        str << " #{recur_str.titleize}"
+        str << " #{recur_str}"
       else
         str << " #{pluralize(recur_frequency, recur_str)}"
       end
@@ -44,9 +46,9 @@ class TourAvailability < ApplicationRecord
 
         if recur_days.count == 7
           str << " daily"
-        elsif recur_days.all? { |e| weekdays.include?(e) }
+        elsif weekdays.all? { |e| recur_days.include?(e) }
           str << " on Weekdays"
-        elsif recur_days.all? { |e| weekends.include?(e) }
+        elsif weekends.all? { |e| recur_days.include?(e) }
           str << " on Weekends"
         else
           str << " on #{recur_days_to_arr.map { |e| "#{e}s" }.join(', ')}"
@@ -59,6 +61,9 @@ class TourAvailability < ApplicationRecord
           day = start_date.day
           str << " on the #{day}#{day.ordinal}"
         end
+      elsif yearly?
+        format = "%b %-d"
+        str << " on #{[pretty_date_and_time(start_date, start_time, format), pretty_date_and_time(end_date, end_time || start_time, format)].compact.join(" to ")}"
       end
 
       if recur_end_date
@@ -96,6 +101,13 @@ class TourAvailability < ApplicationRecord
       max_date = [start_date, end_date].compact.max
       if recur_end_date && recur_end_date < max_date
         errors.add(:recur_end_date, "should not be before #{max_date}.")
+      end
+    end
+
+    [:start_time, :end_time].each do |time|
+      val = send(time)
+      if val && !valid_time?(val)
+        errors.add(time, 'is not a valid time.')
       end
     end
   end
