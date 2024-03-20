@@ -9,10 +9,15 @@ window.addEventListener('load', function () {
 
   function updateVisibility() {
     const recurType = form.find('.recur_type').val();
+    const recurFrequency = form.find('.recur_frequency');
 
     form.find('.recur_options').toggleClass('hidden', !recurType.length);
     form.find('.recur_options_weekly').toggleClass('hidden', recurType !== 'weekly');
     form.find('.recur_options_monthly').toggleClass('hidden', recurType !== 'monthly');
+
+    if (!recurFrequency.val()) {
+      recurFrequency.val(1);
+    }
     updateDates();
   }
 

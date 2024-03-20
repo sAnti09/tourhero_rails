@@ -14,59 +14,59 @@
 
   <%= form.hidden_field :tour_id %>
 
-  <div>
+  <p>
     <%= form.label :start_date, style: "display: block" %>
     <%= form.date_field :start_date, class: 'start_date' %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= form.label :start_time, style: "display: block" %>
     <%= form.number_field :start_time %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= form.label :end_date, style: "display: block" %>
     <%= form.date_field :end_date %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= form.label :end_time, style: "display: block" %>
     <%= form.number_field :end_time %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= form.label :recur_type, style: "display: block" %>
     <%= form.select :recur_type, options_for_enum(TourAvailability.recur_types, tour_availability.recur_type), { include_blank: true }, class: 'recur_type' %>
-  </div>
+  </p>
 
-  <div class="recur_options">
-    <div>
+  <div class="recur_options hidden" style="margin-left: 20px;">
+    <p>
       <%= form.label :recur_frequency, style: "display: block" %>
-      <%= form.number_field :recur_frequency %>
-    </div>
+      <%= form.number_field :recur_frequency, class: 'recur_frequency' %>
+    </p>
 
-    <div class="recur_options_weekly">
+    <p class="recur_options_weekly">
       <%= form.label :recur_days, style: "display: block" %>
       <% Date::DAYNAMES.map.with_index do |day, index| %>
         <%= check_box_tag 'tour_availability[recur_days][]', index, tour_availability.recur_days.include?(index) %>
         <%= day %>
       <% end %>
-    </div>
+    </p>
 
-    <div class="recur_options_monthly">
+    <p class="recur_options_monthly">
       <%= form.label :recur_month, style: "display: block" %>
       <%= form.select :recur_month, options_for_enum(TourAvailability.recur_months, tour_availability.recur_month), { include_blank: true }, class: 'recur_month' %>
-    </div>
+    </p>
 
-    <div>
+    <p>
       <%= form.label :recur_end_date, style: "display: block" %>
       <%= form.date_field :recur_end_date %>
-    </div>
+    </p>
 
-    <div>
+    <p>
       <%= form.label :recur_end_occurrence, style: "display: block" %>
       <%= form.number_field :recur_end_occurrence %>
-    </div>
+    </p>
   </div>
 
   <div>
