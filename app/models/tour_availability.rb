@@ -22,6 +22,9 @@ class TourAvailability < ApplicationRecord
     if start_date
       max_date = [start_date, end_date].compact.max
 
+      if end_date && end_date < start_date
+        errors.add(:end_date, "should not be before #{start_date}.")
+      end
       if recur_end_date && recur_end_date < max_date
         errors.add(:recur_end_date, "should not be before #{max_date}.")
       end
