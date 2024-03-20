@@ -36,7 +36,7 @@
 
   <div>
     <%= form.label :recur_type, style: "display: block" %>
-    <%= form.select :recur_type, options_for_enum(TourAvailability.recur_types), prompt: 'Select' %>
+    <%= form.select :recur_type, options_for_enum(TourAvailability.recur_types, tour_availability.recur_type), include_blank: true %>
   </div>
 
   <div>
@@ -53,7 +53,7 @@
 
   <div>
     <%= form.label :recur_month, style: "display: block" %>
-    <%= form.select :recur_month, options_for_enum(TourAvailability.recur_months), prompt: 'Select' %>
+    <%= form.select :recur_month, options_for_enum(TourAvailability.recur_months, tour_availability.recur_month), include_blank: true %>
   </div>
 
   <div>

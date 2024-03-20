@@ -5,9 +5,15 @@ class TourAvailability < ApplicationRecord
 
   belongs_to :tour
 
-  validates_presence_of :start_date
+  validate :rules
 
   def recur_days_to_s
     recur_days.map { |e| Date::DAYNAMES[e] }.join(", ")
+  end
+
+  private
+
+  def rules
+
   end
 end
