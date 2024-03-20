@@ -117,6 +117,9 @@ class TourAvailabilityTest < ActiveSupport::TestCase
     availability.recur_days = (0..6).to_a
     assert_equal availability.to_s, "starts every week daily"
 
+    availability.recur_days = [0, 1, 6]
+    assert_equal availability.to_s, "starts every week on Sundays, Mondays, Saturdays"
+
     availability.recur_days = [7]
     assert_not availability.save
     assert_includes availability.errors.full_messages_for(:recur_days).first, "not included in the list"

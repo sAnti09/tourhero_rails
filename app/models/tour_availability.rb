@@ -46,9 +46,9 @@ class TourAvailability < ApplicationRecord
 
         if recur_days.count == 7
           str << " daily"
-        elsif weekdays.all? { |e| recur_days.include?(e) }
+        elsif weekdays.count == recur_days.count && weekdays.all? { |e| recur_days.include?(e) }
           str << " on Weekdays"
-        elsif weekends.all? { |e| recur_days.include?(e) }
+        elsif weekends.count == recur_days.count && weekends.all? { |e| recur_days.include?(e) }
           str << " on Weekends"
         else
           str << " on #{recur_days_to_arr.map { |e| "#{e}s" }.join(', ')}"
