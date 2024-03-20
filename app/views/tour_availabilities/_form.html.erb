@@ -1,0 +1,69 @@
+<%= form_with(model: [@tour, tour_availability]) do |form| %>
+  <% if tour_availability.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(tour_availability.errors.count, "error") %> prohibited this tour_availability from being saved:</h2>
+
+      <ul>
+        <% tour_availability.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :tour_id %>
+
+  <div>
+    <%= form.label :start_date, style: "display: block" %>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div>
+    <%= form.label :start_time, style: "display: block" %>
+    <%= form.number_field :start_time %>
+  </div>
+
+  <div>
+    <%= form.label :end_date, style: "display: block" %>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <div>
+    <%= form.label :end_time, style: "display: block" %>
+    <%= form.number_field :end_time %>
+  </div>
+
+  <div>
+    <%= form.label :recur_type, style: "display: block" %>
+    <%= form.text_field :recur_type %>
+  </div>
+
+  <div>
+    <%= form.label :recur_frequency, style: "display: block" %>
+    <%= form.number_field :recur_frequency %>
+  </div>
+
+  <div>
+    <%= form.label :recur_days, style: "display: block" %>
+    <%= form.number_field :recur_days %>
+  </div>
+
+  <div>
+    <%= form.label :recur_month, style: "display: block" %>
+    <%= form.text_field :recur_month %>
+  </div>
+
+  <div>
+    <%= form.label :recur_end_date, style: "display: block" %>
+    <%= form.date_field :recur_end_date %>
+  </div>
+
+  <div>
+    <%= form.label :recur_end_occurrence, style: "display: block" %>
+    <%= form.number_field :recur_end_occurrence %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

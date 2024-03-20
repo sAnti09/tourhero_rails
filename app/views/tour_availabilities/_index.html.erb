@@ -1,0 +1,17 @@
+<h4>Tour availabilities</h4>
+
+<div id="tour_availabilities">
+  <ul>
+    <% tour_availabilities.each do |tour_availability| %>
+      <li>
+        <%= render tour_availability %>
+        <p>
+          <%= link_to "Edit this tour availability", edit_tour_tour_availability_path(@tour, tour_availability) %>
+          <%= link_to "Delete this tour availability", tour_tour_availability_path(@tour, tour_availability), data: { "turbo-method": :delete } %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= link_to "New tour availability", new_tour_tour_availability_path(@tour) %>

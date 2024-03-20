@@ -1,0 +1,10 @@
+<h1>Editing tour availability</h1>
+
+<%= render "form", tour_availability: @tour_availability %>
+
+<br>
+
+<div>
+  <%= link_to "Show this tour availability", tour_tour_availabilities_path(@tour_availability) %> |
+  <%= link_to "Back to tour availabilities", tour_path(@tour) %>
+</div>

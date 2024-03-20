@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_131743) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_20_134411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_131743) do
     t.integer "recur_end_occurrence"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tour_id"
+    t.index ["tour_id"], name: "index_tour_availabilities_on_tour_id"
   end
 
   create_table "tours", force: :cascade do |t|

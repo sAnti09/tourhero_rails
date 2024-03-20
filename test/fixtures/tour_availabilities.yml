@@ -7,7 +7,7 @@ one:
   end_time: 1
   recur_type: 
   recur_frequency: 1
-  recur_days: [1]
+  recur_days: 1
   recur_month: 
   recur_end_date: 2024-03-20
   recur_end_occurrence: 1
@@ -19,7 +19,7 @@ two:
   end_time: 1
   recur_type: 
   recur_frequency: 1
-  recur_days: [1]
+  recur_days: 1
   recur_month: 
   recur_end_date: 2024-03-20
   recur_end_occurrence: 1

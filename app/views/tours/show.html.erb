@@ -2,6 +2,10 @@
 
 <%= render @tour %>
 
+<div style="padding-left: 20px; padding-bottom: 20px">
+  <%= render 'tour_availabilities/index', tour_availabilities: @tour.tour_availabilities %>
+</div>
+
 <div>
   <%= link_to "Edit this tour", edit_tour_path(@tour) %> |
   <%= link_to "Back to tours", tours_path %>
