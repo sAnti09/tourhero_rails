@@ -51,17 +51,21 @@ class TourAvailabilitiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tour
-      @tour = Tour.find(params[:tour_id])
-    end
 
-    def set_tour_availability
-      @tour_availability = TourAvailability.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tour
+    @tour = Tour.find(params[:tour_id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def tour_availability_params
-      params.require(:tour_availability).permit(:start_date, :start_time, :end_date, :end_time, :recur_type, :recur_frequency, :recur_month, :recur_end_date, :recur_end_occurrence, recur_days: [])
-    end
+  def set_tour_availability
+    @tour_availability = TourAvailability.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tour_availability_params
+    params
+      .require(:tour_availability)
+      .permit(:start_date, :start_time, :end_date, :end_time, :recur_type, :recur_frequency, :recur_month, :recur_end_date, :recur_end_occurrence, recur_days: [])
+      .with_defaults(recur_days: [])
+  end
 end
